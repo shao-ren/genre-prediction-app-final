@@ -487,7 +487,32 @@ def main():
             st.subheader("Audio Features")
             energy = st.slider("Energy", 0.0, 1.0, 0.5, 0.01, help="Energy represents intensity and activity. Typically, energetic tracks feel fast, loud, and noisy.")
             mode = st.radio("Mode", [0, 1], index=1, help="Mode indicates the modality (major or minor) of a track. Major is 1, minor is 0.")
-            key = st.selectbox("Key", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], index=0, help="The key the track is in. Integers map to pitches using standard Pitch Class notation.")
+            
+            # Updated key selection with proper pitch class notation
+            key_options = {
+                -1: "No key detected",
+                0: "C",
+                1: "C♯/D♭",
+                2: "D",
+                3: "D♯/E♭",
+                4: "E",
+                5: "F",
+                6: "F♯/G♭",
+                7: "G",
+                8: "G♯/A♭",
+                9: "A",
+                10: "A♯/B♭",
+                11: "B"
+            }
+            key_selection = st.selectbox(
+            "Key", 
+            options=list(key_options.keys()), 
+            format_func=lambda x: key_options[x],
+            index=1,  # Default to C (0)
+            help="The key the track is in. Integers map to pitches using standard Pitch Class notation."
+            )
+            key = key_selection  # Store the numeric value
+            # key = st.selectbox("Key", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], index=0, help="The key the track is in. Integers map to pitches using standard Pitch Class notation.")
             valence = st.slider("Valence", 0.0, 1.0, 0.5, 0.01, help="Valence describes the musical positiveness conveyed by a track. High valence sounds more positive.")
             tempo = st.slider("Tempo (BPM)", 60.0, 200.0, 120.0, 1.0, help="The overall estimated tempo of a track in beats per minute (BPM).")
             word_count = st.slider("Word Count", 0, 500, 100, 10, help="Approximate number of words in the lyrics.")
