@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+joblib
+requests
+python-dotenv
+lyricsgenius
+nltk
+transformers
+torch
+textblob
+scikit-learn
